@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Registro de Cliente{% endblock %}
+{% if messages %}
+  <div class="mb-4">
+    {% for message in messages %}
+      <div class="p-4 rounded text-white {{ message.tags }} bg-green-500">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-6">Registro de Cliente</h2>
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Formulario de usuario -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="id_apellido" class="block text-sm font-semibold text-gray-700">Apellido</label>
+                {{ user_form.last_name }}
+            </div>
+              <div>
+                <label for="id_nombre" class="block text-sm font-semibold text-gray-700">Nombre</label>
+                {{ user_form.first_name }}
+            </div>
+
+            <div>
+                <label for="id_dni" class="block text-sm font-semibold text-gray-700">DNI</label>
+                {{ user_form.dni }}
+            </div>
+            <div>
+                <label for="id_direccion" class="block text-sm font-semibold text-gray-700">Dirección</label>
+                {{ user_form.direccion }}
+            </div>
+            <div>
+                <label for="id_genero" class="block text-sm font-semibold text-gray-700">Género</label>
+                {{ user_form.genero }}
+            </div>
+               <div>
+                <label for="id_email" class="block text-sm font-semibold text-gray-700">email</label>
+                {{ user_form.email }}
+            </div>
+            <div>
+                <label for="id_username" class="block text-sm font-semibold text-gray-700">Nombre de usuario</label>
+                {{ user_form.username }}
+            </div>
+                        <div>
+                <label for="id_password1" class="block text-sm font-semibold text-gray-700">Contraseña</label>
+                {{ user_form.password1 }}
+            </div>
+            <div>
+                <label for="id_password2" class="block text-sm font-semibold text-gray-700">Confirmar contraseña</label>
+                {{ user_form.password2 }}
+            </div>
+             
+        </div>
+
+        <button type="submit" class="bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600 transition duration-200">Registrar</button>
+    </form>
+</div>
+{% endblock %}

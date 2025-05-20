@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="es">
+{% load static %}    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Proyecto Django{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    
+    <!-- Barra de navegación -->
+    <nav class="bg-blue-600 text-white p-4 shadow-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-xl font-bold">
+                <a href="{% url 'home_redirect' %}">Gimnasio Online</a>
+            </div>
+            <div class="space-x-4">
+                {% if user.is_authenticated %}
+                    <span>Hola, {{ user.first_name }}</span>
+                    <a href="{% url 'logout' %}" class="bg-red-500 px-3 py-1 rounded hover:bg-red-600 transition">Cerrar sesión</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="hover:underline">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="h-screen flex items-center justify-center flex-col px-4 bg-cover bg-center"
+            style='background-image: url("{% static "imagenes/fondo_web.jpeg" %}");'>       
+           
+            
+            <div class="max-w-4xl mx-auto py-10 px-4 w-full">
+            
+            {% block content %}
+            
+             <h1 class="text-6xl text-center text-white font-bold mb-6">Bienvenido a Nuestra web</h1> 
+
+            {% endblock %}
+
+            </div>
+ 
+    </main>
+
+    <!-- Footer opcional -->
+    <footer class="text-center text-sm text-gray-500 py-6">
+        &copy; {{ year|default:"2025" }} Gimnasio Online. Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>
